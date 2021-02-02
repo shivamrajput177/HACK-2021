@@ -1,11 +1,19 @@
-import React from 'react' 
+import React, { useState } from 'react' 
+import ReactPlayer from "react-player";
+import { Container,Row, Col } from 'react-bootstrap';
 import Navbar from '../components/Navbar'
-import { Container,Row, Col, Button } from 'react-bootstrap';
+
 
 export default function ImgView() {
+    const [videoFilePath, setVideoFileURL] = useState(null)
+
     const [image, setImage] = React.useState("");
     const imageRef = React.useRef(null);
   
+    const handleVideoUpload = (event) => {
+      setVideoFileURL(URL.createObjectURL(event.target.files[0]));
+      }
+    
     function useDisplayImage() {
       const [result, setResult] = React.useState("");
   
@@ -28,13 +36,14 @@ export default function ImgView() {
     return (
        <div> 
        <Navbar />
-      <div className="App" style={{"width": "300px",
-                                  "display": "block",
-                                  "marginTop": "20%",
-                                  "margin": "auto",
-                                  "padding": "50px",
-                                  }}>
-        <div>
+        <div style={{width: "300px",
+                    borderStyle: "double",
+                    display: "block",
+                    marginTop: "20px",
+                    marginLeft: "40%",
+                    boxAlign: "center"
+                     }}>
+        <h3>Choose Image</h3>
         <input
           type="file"
           onChange={(e) => {
@@ -43,20 +52,40 @@ export default function ImgView() {
           }}
         />
         </div>
+
+        <div style={{width: "300px",
+                     borderStyle: "double",
+                     display: "block",
+                     marginTop: "20px",
+                     marginLeft: "40%",
+                     marginBottom:"30px"
+                    }}>
+        <h3>Choose Video</h3>
+        <input
         
+         type="file" 
+         onChange={handleVideoUpload} />
+        </div>
+        <div style={{width:"505px",height:"505px",marginLeft:"32%",marginBottom:"50px",borderStyle: "double"}}>
+        <ReactPlayer style={{"display":"center"}} url={videoFilePath} width="499px" height="500px" controls={true} />
+        </div>
         {result && 
             <Container fluid>
                 <Row>
                 <Col xs={6} md={6}>
-                <img src={result} alt="Chosen Image" />
+                <div style={{marginLeft:"60px"}}>
+                <img width="500px" height="500px" src={result} alt="Chosen Image" />
+                </div>
                 </Col>
                 <Col xs={6} md={6}>
-                <img src={result} alt="Result Image" />
+                <div>
+                <img width="500px" height="500px" src={result} alt="Result Image" />
+                </div>
                 </Col>                   
                 </Row>
             </Container>
         }
         </div>
-      </div>
+      
     );
   }

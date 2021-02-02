@@ -9,7 +9,7 @@ const Home = () => {
             <Navbar />
             <div className="home_content">
                 <img src={HomeImg} alt="Home" className="back_img"></img>
-                <Link to="/img" className="home_btn_img" style={{textDecoration: "none", fontSize: "20px"}}>Upload Img</Link>
+                <Link to="/img" className="home_btn_img" style={{textDecoration: "none", fontSize: "20px"}}>Upload Imgage and Video</Link>
                 <Link to="/video" className="home_btn_video" style={{textDecoration: "none", fontSize: "20px"}}>Video</Link>
             </div>
         </div>
